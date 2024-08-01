@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+<div id="header-placeholder"></div>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item"><a href="index.html">Home</a></li>
+                <li class="menu-item"><a href="about.html">About</a></li>
+                <li class="menu-item"><a href="topics.html?topic=java">Java</a></li>
+                <li class="menu-item"><a href="topics.html?topic=python">Python</a></li>
+                <li class="menu-item"><a href="mailto:remitmathew@gmail.com">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <h1>About</h1>
+            <p>This is the Learning Journey website where you can find tutorials and guides on various programming topics. If you have any suggestions or find any mistakes, please <a href="mailto:remitmathew@gmail.com">contact me</a>.</p>
+        </section>
+        <section class="review-form">
+            <h2>Give Us Your Feedback</h2>
+            <form id="review-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Your Review/Suggestion:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+<div id="footer-placeholder"></div>
+    <footer>
+        <p>&copy; 2024 Learning Journey. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+
+<script src="loadTemplate.js"></script>
+
+    <div id="footer"></div>
+    <script src="../loadTemplate.js"></script>
+</body>
+
+</html>

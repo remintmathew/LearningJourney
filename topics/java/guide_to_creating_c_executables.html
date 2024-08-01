@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide to Creating and Executing C Executables with Shared Libraries and Java Integration</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="../../index.html">Home</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../about.html">About</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../topics.html?topic=java">Java</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../topics.html?topic=python">Python</a>
+                </li>
+                <li class="menu-item">
+                    <a href="mailto:remitmathew@gmail.com">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search topics..." id="search-input">
+            <button type="button" onclick="searchTopics()">Search</button>
+        </div>
+    </header>
+    <main>
+        <section class="content">
+            <h1>Guide to Creating and Executing C Executables with Shared Libraries and Java Integration</h1>
+            <h2>1. Compiling a C Program to an Executable</h2>
+            <h3>Step 1: Write a C Program</h3>
+            <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}
+</code></pre>
+            <h3>Step 2: Compile the C Program</h3>
+            <pre><code class="language-shell">gcc -o example example.c</code></pre>
+
+            <h2>2. Executing the C Program in the Console</h2>
+            <h3>Step 3: Run the Executable</h3>
+            <pre><code class="language-shell">./example</code></pre>
+
+            <h2>3. Including Shared .so Libraries</h2>
+            <h3>Step 4: Create a Shared Library</h3>
+            <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void my_function() {
+    printf("Shared Library Function Called!\\n");
+}
+</code></pre>
+            <pre><code class="language-shell">gcc -shared -o libmylib.so -fPIC mylib.c</code></pre>
+
+            <h3>Step 5: Update the C Program to Use the Shared Library</h3>
+            <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void my_function();
+
+int main() {
+    my_function();
+    printf("Hello, World!\\n");
+    return 0;
+}
+</code></pre>
+            <pre><code class="language-shell">gcc -o example example.c -L. -lmylib</code></pre>
+
+            <h2>4. Temporarily Modifying Environment Variables</h2>
+            <h3>Step 6: Set the LD_LIBRARY_PATH</h3>
+            <pre><code class="language-shell">LD_LIBRARY_PATH=. ./example</code></pre>
+
+            <h2>5. Executing the Executable from Java</h2>
+            <h3>Step 7: Java Code to Execute the C Program</h3>
+            <pre><code class="language-java">import java.io.*;
+import java.util.*;
+
+public class RunCProgram {
+
+    public static void main(String[] args) {
+        String executablePath = "./example";
+        String libraryPath = ".";
+
+        try {
+            // Path to the compiled C program
+            System.out.println("Executable Path: " + executablePath);
+
+            // Verify if the file exists and has execute permissions
+            File file = new File(executablePath);
+            if (!file.exists()) {
+                System.err.println("The specified file does not exist: " + executablePath);
+                return;
+            }
+            if (!file.canExecute()) {
+                System.err.println("The specified file is not executable: " + executablePath);
+                return;
+            }
+
+            // Use ProcessBuilder to set environment variables
+            ProcessBuilder builder = new ProcessBuilder(executablePath);
+
+            // Set the LD_LIBRARY_PATH and other environment variables
+            Map environment = builder.environment();
+            environment.put("LD_LIBRARY_PATH", libraryPath);
+
+            // Copy all environment variables from system console to Java process
+            Process envProcess = Runtime.getRuntime().exec("printenv");
+            BufferedReader envReader = new BufferedReader(new InputStreamReader(envProcess.getInputStream()));
+            String envLine;
+            while ((envLine = envReader.readLine()) != null) {
+                String[] keyValue = envLine.split("=", 2);
+                if (keyValue.length == 2) {
+                    environment.put(keyValue[0], keyValue[1]);
+                }
+            }
+
+            System.out.println("Environment Variables:");
+            for (Map.Entry entry : environment.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+
+            // Start the process
+            Process process = builder.start();
+
+            // Get the input stream (output of the C program)
+            captureStream(process.getInputStream(), System.out, "Output of the C program:");
+
+            // Get the error stream (to check for any errors during execution)
+            captureStream(process.getErrorStream(), System.err, "Errors (if any):");
+
+            // Wait for the process to complete and return the exit code
+            int exitCode = process.waitFor();
+            System.out.println("C program exited with code: " + exitCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void captureStream(InputStream stream, PrintStream output, String header) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String line;
+        output.println(header);
+        while ((line = reader.readLine()) != null) {
+            output.println(line);
+        }
+    }
+}
+</code></pre>
+
+            <h2>6. Copy Environment Variables to Java in Eclipse</h2>
+            <h3>Step 8: Generate Environment Variables File in Console</h3>
+            <pre><code class="language-shell">printenv > env_vars.txt</code></pre>
+            <h3>Step 9: Read Environment Variables File in Java</h3>
+            <pre><code class="language-java">import java.io.*;
+import java.util.*;
+
+public class RunCProgram {
+
+    public static void main(String[] args) {
+        String executablePath = "./example";
+        String libraryPath = ".";
+
+        try {
+            // Path to the compiled C program
+            System.out.println("Executable Path: " + executablePath);
+
+            // Verify if the file exists and has execute permissions
+            File file = new File(executablePath);
+            if (!file.exists()) {
+                System.err.println("The specified file does not exist: " + executablePath);
+                return;
+            }
+            if (!file.canExecute()) {
+                System.err.println("The specified file is not executable: " + executablePath);
+                return;
+            }
+
+            // Use ProcessBuilder to set environment variables
+            ProcessBuilder builder = new ProcessBuilder(executablePath);
+
+            // Set the LD_LIBRARY_PATH and other environment variables
+            Map environment = builder.environment();
+            environment.put("LD_LIBRARY_PATH", libraryPath);
+
+            // Copy environment variables from env_vars.txt file
+            try (BufferedReader envReader = new BufferedReader(new FileReader("env_vars.txt"))) {
+                String envLine;
+                while ((envLine = envReader.readLine()) != null) {
+                    String[] keyValue = envLine.split("=", 2);
+                    if (keyValue.length == 2) {
+                        environment.put(keyValue[0], keyValue[1]);
+                    }
+                }
+            }
+
+            System.out.println("Environment Variables:");
+            for (Map.Entry entry : environment.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+
+            // Start the process
+            Process process = builder.start();
+
+            // Get the input stream (output of the C program)
+            captureStream(process.getInputStream(), System.out, "Output of the C program:");
+
+            // Get the error stream (to check for any errors during execution)
+            captureStream(process.getErrorStream(), System.err, "Errors (if any):");
+
+            // Wait for the process to complete and return the exit code
+            int exitCode = process.waitFor();
+            System.out.println("C program exited with code: " + exitCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void captureStream(InputStream stream, PrintStream output, String header) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String line;
+        output.println(header);
+        while ((line = reader.readLine()) != null) {
+            output.println(line);
+        }
+    }
+}
+</code></pre>
+            <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
+            <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
+        </section>
+    </main>
+    
+    <form id="reviewForm" action="submit_review.php" method="post" style="margin-bottom: 20px;">
+        <h3>Submit your review</h3>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="review">Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" required></textarea><br>
+        <input type="hidden" id="topic" name="topic" value="Guide To Creating And Executing C Executables With Shared Libraries And Java Integration"><br>
+        <input type="submit" value="Submit"><br><br>
+    </form>
+
+    <div id="footer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+    <script src="../loadTemplate.js"></script>
+</body>
+</html>

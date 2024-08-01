@@ -1,0 +1,17 @@
+
+{
+    "java": {
+        "Introduction to Java": "introduction_to_java.html",
+        "Java OOP Concepts": "java_oop_concepts.html",
+        "Java Streams": "java_streams.html",
+        "Java Collections Framework": "java_collections_framework.html",
+        "Exception Handling in Java": "exception_handling_in_java.html"
+    },
+    "python": {
+        "Python Basics": "python_basics.html",
+        "Python for Data Science": "python_for_data_science.html",
+        "Web Development with Python": "web_development_with_python.html",
+        "Python Libraries": "python_libraries.html",
+        "Exception Handling in Python": "exception_handling_in_python.html"
+    }
+}

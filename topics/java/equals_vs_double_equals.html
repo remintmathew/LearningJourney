@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>== vs .equals in Java</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <main>
+        <section class="content">
+            <h1>== vs .equals in Java</h1>
+            <p>In Java, <code>==</code> and <code>.equals()</code> are used to compare objects, but they work differently and serve different purposes.</p>
+            
+            <h2>Using <code>==</code></h2>
+            <p>The <code>==</code> operator compares the reference (memory location) of two objects, not their content. It checks whether both references point to the same object.</p>
+            <pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String str1 = new String("hello");
+        String str2 = new String("hello");
+
+        if (str1 == str2) {
+            System.out.println("str1 and str2 are the same object");
+        } else {
+            System.out.println("str1 and str2 are different objects");
+        }
+    }
+}</code></pre>
+
+            <h2>Using <code>.equals()</code></h2>
+            <p>The <code>.equals()</code> method compares the content of two objects. For strings, it checks whether the characters in the string are the same.</p>
+            <pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String str1 = new String("hello");
+        String str2 = new String("hello");
+
+        if (str1.equals(str2)) {
+            System.out.println("str1 and str2 have the same content");
+        } else {
+            System.out.println("str1 and str2 have different content");
+        }
+    }
+}</code></pre>
+
+            <h2>Common Pitfall</h2>
+            <p>Using <code>==</code> to compare strings can lead to unexpected results because it compares references, not content. Always use <code>.equals()</code> to compare strings.</p>
+
+            <h2>Why <code>==</code> May Fail</h2>
+            <p>Even if two strings have the same characters, they may not be the same object in memory. The <code>==</code> operator will return <code>false</code> if the references are different.</p>
+
+            <h2>Resolving the Issue</h2>
+            <p>Always use <code>.equals()</code> when comparing strings to ensure content comparison.</p>
+            <pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        String str1 = "hello";
+        String str2 = "hello";
+
+        if (str1.equals(str2)) {
+            System.out.println("str1 and str2 have the same content");
+        } else {
+            System.out.println("str1 and str2 have different content");
+        }
+    }
+}</code></pre>
+            <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
+            <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
+        </section>
+    </main>
+    
+    <form id="reviewForm" action="submit_review.php" method="post" style="margin-bottom: 20px;">
+        <h3>Submit your review</h3>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="review">Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" required></textarea><br>
+        <input type="hidden" id="topic" name="topic" value="Equals Vs Double Equals"><br>
+        <input type="submit" value="Submit"><br><br>
+    </form>
+
+    <div id="footer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+    <script src="../loadTemplate.js"></script>
+</body>
+</html>

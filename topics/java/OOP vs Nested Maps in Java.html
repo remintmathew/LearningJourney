@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managing Hierarchical Structures: OOP vs Nested Maps in Java</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item"><a href="../../index.html">Home</a></li>
+                <li class="menu-item"><a href="../../about.html">About</a></li>
+                <li class="menu-item"><a href="../../topics.html?topic=java">Java</a></li>
+                <li class="menu-item"><a href="../../topics.html?topic=python">Python</a></li>
+                <li class="menu-item"><a href="mailto:remitmathew@gmail.com">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search topics..." id="search-input">
+            <button type="button" onclick="searchTopics()">Search</button>
+        </div>
+    </header>
+    <main>
+        <section class="content">
+            <h1>Managing Hierarchical Structures: OOP vs Nested Maps in Java</h1>
+            <p>This topic explains the advantages of using Object-Oriented Programming (OOP) to manage hierarchical structures over using a nested map structure. Consider the scenario specifically in the context of a chip containing several cores, and each core containing different sub-cores.</p>
+
+            <h2>Nested Map of Maps Approach</h2>
+            <p>Using a nested map structure to manage hierarchical data can be cumbersome and less readable. Here's an example of managing a chip with cores and sub-cores using nested maps:</p>
+            <ul>
+                <li><strong>Readability and Maintainability:</strong> The nested map structure is harder to read and maintain. It’s not immediately clear what each level of the map represents.</li>
+                <li><strong>Encapsulation:</strong> There is no encapsulation of behavior or data, leading to a less modular design.</li>
+                <li><strong>Error-Prone:</strong> More prone to errors due to manual management of nested structures. For example, a missing key could lead to a <code>NullPointerException</code>.</li>
+                <li><strong>Flexibility:</strong> Extending the structure (e.g., adding a new attribute to <code>SubCore</code>) is more difficult and less intuitive compared to the OOP approach.</li>
+            </ul>
+
+            <h3>Code Example</h3>
+            <pre><code class="language-java">import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating the nested map structure for multiple chips
+        Map<String, Map<String, Map<String, String>>> chips = new HashMap<>();
+
+        // Iterative population for multiple chips
+        for (int k = 1; k <= 2; k++) {
+            String chipId = "Chip_" + k;
+            Map<String, Map<String, String>> chip = new HashMap<>();
+            
+            for (int i = 1; i <= 3; i++) {
+                String coreId = "Core_" + i;
+                Map<String, String> core = new HashMap<>();
+                
+                for (int j = 1; j <= 2; j++) {
+                    String subCoreId = "SubCore_" + ((i - 1) * 2 + j);
+                    core.put(subCoreId, subCoreId);  // Using the sub-core name as the value
+                }
+                chip.put(coreId, core);
+            }
+            chips.put(chipId, chip);
+        }
+
+        // Iterative extraction for multiple chips
+        for (String chipId : chips.keySet()) {
+            System.out.println("Chip: " + chipId);
+            Map<String, Map<String, String>> chip = chips.get(chipId);
+            
+            for (String coreId : chip.keySet()) {
+                System.out.println("  Core: " + coreId);
+                Map<String, String> core = chip.get(coreId);
+                
+                for (String subCoreId : core.keySet()) {
+                    System.out.println("    SubCore: " + core.get(subCoreId));
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+            <h2>Object-Oriented Programming (OOP) Approach</h2>
+            <p>Using OOP to manage hierarchical structures offers several benefits:</p>
+            <ul>
+                <li><strong>Encapsulation:</strong> Each class encapsulates its own data and behavior.</li>
+                <li><strong>Readability and Maintainability:</strong> Code is organized into classes, making it easier to read and maintain.</li>
+                <li><strong>Reusability:</strong> Classes can be reused to create multiple instances without duplicating code.</li>
+                <li><strong>Iterating and Populating:</strong> Clear and straightforward with methods and attributes encapsulated within classes.</li>
+            </ul>
+
+            <h3>Code Example</h3>
+            <pre><code class="language-java">// SubCore Class
+class SubCore {
+    private String subCoreName;
+
+    public SubCore(String subCoreName) {
+        this.subCoreName = subCoreName;
+    }
+
+    @Override
+    public String toString() {
+        return "SubCore{name='" + subCoreName + "'}";
+    }
+}
+
+// Core Class
+class Core {
+    private String coreId;
+    private List<SubCore> subCores;
+
+    public Core(String coreId) {
+        this.coreId = coreId;
+        this.subCores = new ArrayList<>();
+    }
+
+    public void addSubCore(SubCore subCore) {
+        this.subCores.add(subCore);
+    }
+
+    public String getCoreId() {
+        return coreId;
+    }
+
+    public List<SubCore> getSubCores() {
+        return subCores;
+    }
+
+    @Override
+    public String toString() {
+        return "Core{id='" + coreId + "', subCores=" + subCores + "}";
+    }
+}
+
+// Chip Class
+class Chip {
+    private String chipId;
+    private List<Core> cores;
+
+    public Chip(String chipId) {
+        this.chipId = chipId;
+        this.cores = new ArrayList<>();
+    }
+
+    public void addCore(Core core) {
+        this.cores.add(core);
+    }
+
+    public List<Core> getCores() {
+        return cores;
+    }
+
+    @Override
+    public String toString() {
+        return "Chip{id='" + chipId + "', cores=" + cores + "}";
+    }
+}
+
+// Main Class
+public class ChipSystem {
+    public static void main(String[] args) {
+        List<Chip> chips = new ArrayList<>();
+
+        // Iterative population for multiple chips
+        for (int k = 1; k <= 2; k++) {
+            Chip chip = new Chip("Chip_" + k);
+            for (int i = 1; i <= 3; i++) {
+                Core core = new Core("Core_" + i);
+                for (int j = 1; j <= 2; j++) {
+                    core.addSubCore(new SubCore("SubCore_" + ((i - 1) * 2 + j)));
+                }
+                chip.addCore(core);
+            }
+            chips.add(chip);
+        }
+
+        // Iterative extraction for multiple chips
+        for (Chip chip : chips) {
+            System.out.println("Chip: " + chip);
+            for (Core core : chip.getCores()) {
+                System.out.println("  Core: " + core);
+                for (SubCore subCore : core.getSubCores()) {
+                    System.out.println("    " + subCore);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+            <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
+            <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
+        </section>
+    </main>
+    
+    <form id="reviewForm" action="submit_review.php" method="post" style="margin-bottom: 20px;">
+        <h3>Submit your review</h3>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="review">Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" required></textarea><br>
+        <input type="hidden" id="topic" name="topic" value="Managing Hierarchical Structures: OOP vs Nested Maps in Java"><br>
+        <input type="submit" value="Submit"><br><br>
+    </form>
+
+    <div id="footer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+    <script src="../loadTemplate.js"></script>
+</body>
+</html>

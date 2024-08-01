@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Maps and IC Validation</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="../../index.html">Home</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../about.html">About</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../topics.html?topic=java">Java</a>
+                </li>
+                <li class="menu-item">
+                    <a href="../../topics.html?topic=python">Python</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search topics..." id="search-input">
+            <button type="button" onclick="searchTopics()">Search</button>
+        </div>
+    </header>
+    <main>
+        <section class="content">
+            <h1>Java Maps and IC Validation</h1>
+            <p>A Map is an object that maps keys to values. A map cannot contain duplicate keys; each key can map to at most one value.</p>
+            
+            <h2>Overview of Maps</h2>
+            <p>Maps are part of the Java Collections Framework and are used for storing data in key-value pairs. They provide a convenient way to associate keys with values and to retrieve values based on their keys.</p>
+            
+            <h2>Types of Maps</h2>
+            <p>There are several types of maps in Java:</p>
+            <ul>
+                <li><strong>HashMap</strong></li>
+                <li><strong>LinkedHashMap</strong></li>
+                <li><strong>TreeMap</strong></li>
+                <li><strong>Hashtable</strong></li>
+            </ul>
+
+            <h2>HashMap vs LinkedHashMap</h2>
+            <p><strong>HashMap:</strong> HashMap makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.</p>
+            <p><strong>LinkedHashMap:</strong> LinkedHashMap is an ordered version of HashMap that maintains a doubly-linked List across all entries. This linked list defines the iteration ordering, which is normally the order in which keys were inserted into the map (insertion-order).</p>
+
+            <h2>Adding Values to a Map</h2>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a HashMap
+        Map<String, Integer> map = new HashMap<>();
+
+        // Adding values to the map
+        map.put("One", 1);
+        map.put("Two", 2);
+        map.put("Three", 3);
+
+        // Displaying the map
+        System.out.println(map);
+    }
+}
+</code></pre>
+
+            <h2>Iterating over a Map</h2>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a HashMap
+        Map<String, Integer> map = new HashMap<>();
+
+        // Adding values to the map
+        map.put("One", 1);
+        map.put("Two", 2);
+        map.put("Three", 3);
+
+        // Iterating over the map
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+    }
+}
+</code></pre>
+
+            <h2>Map of Maps</h2>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a Map of Map
+        Map<String, Map<String, Integer>> mapOfMap = new HashMap<>();
+
+        // Creating inner maps
+        Map<String, Integer> innerMap1 = new HashMap<>();
+        innerMap1.put("One", 1);
+        innerMap1.put("Two", 2);
+
+        Map<String, Integer> innerMap2 = new HashMap<>();
+        innerMap2.put("Three", 3);
+        innerMap2.put("Four", 4);
+
+        // Adding inner maps to the main map
+        mapOfMap.put("First", innerMap1);
+        mapOfMap.put("Second", innerMap2);
+
+        // Displaying the Map of Map
+        System.out.println(mapOfMap);
+    }
+}
+</code></pre>
+
+            <h2>Practical Example</h2>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creating a Map to store student grades
+        Map<String, Integer> studentGrades = new HashMap<>();
+
+        // Adding student grades
+        studentGrades.put("Alice", 85);
+        studentGrades.put("Bob", 92);
+        studentGrades.put("Charlie", 78);
+
+        // Iterating over the student grades
+        for (Map.Entry<String, Integer> entry : studentGrades.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+</code></pre>
+
+            <p>Maps are useful for storing and managing test results, voltages, currents, and other measurements across different sites and conditions.</p>
+
+            <h3>Storing Voltage Values per Site</h3>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class ICValidation {
+    public static void main(String[] args) {
+        // Creating a map to store voltage values per site
+        Map<String, Double> voltageMap = new HashMap<>();
+
+        // Adding voltage values
+        voltageMap.put("Site1", 1.1);
+        voltageMap.put("Site2", 1.2);
+        voltageMap.put("Site3", 1.3);
+
+        // Displaying the voltage values
+        for (Map.Entry<String, Double> entry : voltageMap.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue() + "V");
+        }
+    }
+}
+</code></pre>
+
+            <h3>Checking if a Value is Present</h3>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class ICValidation {
+    public static void main(String[] args) {
+        // Creating a map to store voltage values per site
+        Map<String, Double> voltageMap = new HashMap<>();
+
+        // Adding voltage values
+        voltageMap.put("Site1", 1.1);
+        voltageMap.put("Site2", 1.2);
+        voltageMap.put("Site3", 1.3);
+
+        // Checking if a site is present
+        String siteToCheck = "Site2";
+        if (voltageMap.containsKey(siteToCheck)) {
+            System.out.println(siteToCheck + " is present with voltage " + voltageMap.get(siteToCheck) + "V");
+        } else {
+            System.out.println(siteToCheck + " is not present.");
+        }
+    }
+}
+</code></pre>
+
+            <h3>Map of Maps for Storing Scan Results</h3>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class ICValidation {
+    public static void main(String[] args) {
+        // Creating a map of maps to store scan results
+        Map<String, Map<String, Integer>> scanResults = new HashMap<>();
+
+        // Creating inner maps for different tests
+        Map<String, Integer> test1Results = new HashMap<>();
+        test1Results.put("Site1", 100);
+        test1Results.put("Site2", 95);
+
+        Map<String, Integer> test2Results = new HashMap<>();
+        test2Results.put("Site1", 98);
+        test2Results.put("Site2", 99);
+
+        // Adding test results to the main map
+        scanResults.put("Test1", test1Results);
+        scanResults.put("Test2", test2Results);
+
+        // Displaying the scan results
+        for (Map.Entry<String, Map<String, Integer>> testEntry : scanResults.entrySet()) {
+            System.out.println(testEntry.getKey() + " results:");
+            for (Map.Entry<String, Integer> siteEntry : testEntry.getValue().entrySet()) {
+                System.out.println("  " + siteEntry.getKey() + ": " + siteEntry.getValue());
+            }
+        }
+    }
+}
+</code></pre>
+
+            <h3>Map of ArrayList for Storing Multiple Measurements</h3>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ICValidation {
+    public static void main(String[] args) {
+        // Creating a map of ArrayList to store multiple measurements per site
+        Map<String, List<Double>> measurementsMap = new HashMap<>();
+
+        // Adding measurements
+        measurementsMap.computeIfAbsent("Site1", k -> new ArrayList<>()).add(1.1);
+        measurementsMap.computeIfAbsent("Site1", k -> new ArrayList<>()).add(1.15);
+        measurementsMap.computeIfAbsent("Site2", k -> new ArrayList<>()).add(1.2);
+
+        // Displaying the measurements
+        for (Map.Entry<String, List<Double>> entry : measurementsMap.entrySet()) {
+            System.out.println(entry.getKey() + " measurements: " + entry.getValue());
+        }
+    }
+}
+</code></pre>
+
+            <h3>Using computeIfAbsent</h3>
+            <pre><code class="language-java">// Importing necessary classes
+import java.util.HashMap;
+import java.util.Map;
+
+public class ICValidation {
+    public static void main(String[] args) {
+        // Creating a map to store current values per site
+        Map<String, Double> currentMap = new HashMap<>();
+
+        // Adding current values using computeIfAbsent
+        currentMap.computeIfAbsent("Site1", k -> 0.5);
+        currentMap.computeIfAbsent("Site2", k -> 0.7);
+
+        // Displaying the current values
+        for (Map.Entry<String, Double> entry : currentMap.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue() + "A");
+        }
+    }
+}
+</code></pre>
+            <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
+            <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
+        </section>
+    </main>
+    
+    <form id="reviewForm" action="submit_review.php" method="post" style="margin-bottom: 20px;">
+        <h3>Submit your review</h3>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="review">Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50" required></textarea><br>
+        <input type="hidden" id="topic" name="topic" value="Java Maps And Ic Validation"><br>
+        <input type="submit" value="Submit"><br><br>
+    </form>
+
+    <div id="footer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+    <script src="../loadTemplate.js"></script>
+</body>
+</html>
