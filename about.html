@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
 </head>
 
 <body>
     <div id="header"></div>
 
-<div id="header-placeholder"></div>
     <header>
         <nav>
             <ul class="menu">
@@ -21,35 +21,37 @@
                 <li class="menu-item"><a href="mailto:remitmathew@gmail.com">Contact</a></li>
             </ul>
         </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search topics..." id="search-input">
+            <button type="button" onclick="searchTopics()">Search</button>
+        </div>
     </header>
+
     <main>
         <section class="content">
             <h1>About</h1>
             <p>This is the Learning Journey website where you can find tutorials and guides on various programming topics. If you have any suggestions or find any mistakes, please <a href="mailto:remitmathew@gmail.com">contact me</a>.</p>
         </section>
+
         <section class="review-form">
             <h2>Give Us Your Feedback</h2>
-            <form id="review-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Your Review/Suggestion:</label>
-                <textarea id="message" name="message" required></textarea>
+            <form id="review-form" action="https://formspree.io/YOUR_FORM_ID" method="post">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">Your Review/Suggestion:</label><br>
+                <textarea id="message" name="message" required></textarea><br>
                 <button type="submit">Submit</button>
             </form>
         </section>
     </main>
-<div id="footer-placeholder"></div>
+
     <footer>
         <p>&copy; 2024 Learning Journey. All rights reserved.</p>
     </footer>
+
     <script src="script.js"></script>
-
-<script src="loadTemplate.js"></script>
-
-    <div id="footer"></div>
-    <script src="../loadTemplate.js"></script>
+    <script src="loadTemplate.js"></script>
 </body>
-
 </html>
