@@ -3,7 +3,7 @@ const topics = {
         "1. Java Maps": "topics/java/java_maps.html",
         "2. == vs .equals in Java": "topics/java/equals_vs_double_equals.html",
         "3. Guide to Creating and Executing C Executables with Shared Libraries and Java Integration": "topics/java/guide_to_creating_c_executables.html",
-        "4. OOP vs Nested Maps in Java": "topics/java/OOP vs Nested Maps in Java.html",
+        "4. OOP vs Nested Maps in Java": "topics/java/OOP_vs_Nested_Maps_in_Java.html",
         "5. How to Add External Libraries (JAR files) in Eclipse": "topics/java/add_external_jars_eclipse.html"
     },
     python: {
@@ -19,39 +19,47 @@ document.addEventListener("DOMContentLoaded", function() {
         const topicTitle = document.getElementById("topic-title");
         const topicList = document.getElementById("topic-list");
 
-        topicTitle.innerText = `${topic.charAt(0).toUpperCase() + topic.slice(1)} Topics`;
-        
-        for (const [subtopic, link] of Object.entries(topics[topic])) {
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.href = link;
-            a.innerText = subtopic;
-            li.appendChild(a);
-            topicList.appendChild(li);
+        if (topicTitle && topicList) {
+            topicTitle.innerText = `${topic.charAt(0).toUpperCase() + topic.slice(1)} Topics`;
+
+            for (const [subtopic, link] of Object.entries(topics[topic])) {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = link;
+                a.innerText = subtopic;
+                li.appendChild(a);
+                topicList.appendChild(li);
+            }
         }
     } else {
         console.error("Invalid topic or no topics available");
     }
 
-    document.getElementById('review-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        emailjs.sendForm('service_ell6pf6', 'template_87p2hx3', this)
-            .then(function() {
-                alert('Your review/suggestion has been sent!');
-            }, function(error) {
-                alert('Failed to send your review/suggestion. Please try again later.');
-            });
-    });
+    const reviewForm = document.getElementById('review-form');
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            emailjs.sendForm('service_ell6pf6', 'template_87p2hx3', this)
+                .then(function() {
+                    alert('Your review/suggestion has been sent!');
+                }, function(error) {
+                    alert('Failed to send your review/suggestion. Please try again later.');
+                });
+        });
+    }
 
-    document.getElementById('suggest-topic-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        emailjs.sendForm('service_ell6pf6', 'template_87p2hx3', this)
-            .then(function() {
-                alert('Your topic suggestion has been sent!');
-            }, function(error) {
-                alert('Failed to send your topic suggestion. Please try again later.');
-            });
-    });
+    const suggestTopicForm = document.getElementById('suggest-topic-form');
+    if (suggestTopicForm) {
+        suggestTopicForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            emailjs.sendForm('service_ell6pf6', 'template_87p2hx3', this)
+                .then(function() {
+                    alert('Your topic suggestion has been sent!');
+                }, function(error) {
+                    alert('Failed to send your topic suggestion. Please try again later.');
+                });
+        });
+    }
 });
 
 function searchTopics() {
