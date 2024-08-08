@@ -8,46 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
 </head>
 <body>
-    <!-- Header section dynamically loaded -->
-    <div id="header"></div>
-    
-    <header>
-        <nav>
-            <ul class="menu">
-                <li class="menu-item">
-                    <a href="../../index.html">Home</a>
-                </li>
-                <li class="menu-item">
-                    <a href="../../about.html">About</a>
-                </li>
-                <li class="menu-item">
-                    <a href="../../topics.html?topic=java">Java</a>
-                </li>
-                <li class="menu-item">
-                    <a href="../../topics.html?topic=python">Python</a>
-                </li>
-                <li class="menu-item">
-                    <a href="mailto:remitmathew@gmail.com">Contact</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Search topics..." id="search-input">
-            <button type="button" onclick="searchTopics()">Search</button>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <main>
         <section class="content">
             <h1>How to Add External Libraries (JAR files) in Eclipse</h1>
             <p>Adding external libraries (JAR files) to your Eclipse project allows you to use third-party code in your application. This guide will explain what JAR files are, how they differ from `.java` files, where to download them, and how to add them to your project.</p>
-            
+
             <h2>What are JAR Files?</h2>
             <p>JAR (Java ARchive) files are package files that aggregate many Java class files and associated metadata and resources (text, images, etc.) into a single file for distribution. They are used to distribute Java programs and libraries in a platform-independent format.</p>
-            
+
             <h2>Difference between .java and .jar Files</h2>
             <p><code>.java</code> files are source files written in the Java programming language. They contain the human-readable Java code that developers write. <code>.jar</code> files, on the other hand, are compiled files that package compiled <code>.class</code> files and other resources into a single archive. <code>.jar</code> files are used for running applications or libraries, while <code>.java</code> files are used for development.</p>
-            
+
             <h2>Where to Download JAR Files</h2>
             <p>JAR files can be downloaded from various repositories and websites. Some common sources include:</p>
             <ul>
@@ -56,7 +29,7 @@
                 <li><a href="https://repo1.maven.org/maven2/" target="_blank">Maven Repository</a></li>
                 <li><a href="https://sourceforge.net/" target="_blank">SourceForge</a></li>
             </ul>
-            
+
             <h2>How to Add JAR Files to Your Eclipse Project</h2>
             <h3>Step 1: Download the JAR File</h3>
             <p>First, download the JAR file you need from a reliable source.</p>
@@ -83,17 +56,16 @@ public class Main {
         String str = "Hello, World!";
         System.out.println("Is the string empty? " + StringUtils.isEmpty(str));
     }
-}</code></pre>
+}
+            </code></pre>
 
             <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
             <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
         </section>
     </main>
-    
-    <!-- Footer section dynamically loaded -->
-    <div id="footer"></div>
 
-    <!-- JavaScript for dynamic content loading and Prism.js for syntax highlighting -->
+    <div id="footer-placeholder"></div>
+
     <script src="../../loadTemplate.js"></script>
     <script src="../../script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
