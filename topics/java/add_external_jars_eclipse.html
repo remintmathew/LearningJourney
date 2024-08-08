@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Add External Libraries (JAR files) in Eclipse</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-okaidia.min.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="content">
+            <h1>How to Add External Libraries (JAR files) in Eclipse</h1>
+            <p>Adding external libraries (JAR files) to your Eclipse project allows you to use third-party code in your application. This guide will explain what JAR files are, how they differ from `.java` files, where to download them, and how to add them to your project.</p>
+            
+            <h2>What are JAR Files?</h2>
+            <p>JAR (Java ARchive) files are package files that aggregate many Java class files and associated metadata and resources (text, images, etc.) into a single file for distribution. They are used to distribute Java programs and libraries in a platform-independent format.</p>
+            
+            <h2>Difference between .java and .jar Files</h2>
+            <p><code>.java</code> files are source files written in the Java programming language. They contain the human-readable Java code that developers write. <code>.jar</code> files, on the other hand, are compiled files that package compiled <code>.class</code> files and other resources into a single archive. <code>.jar</code> files are used for running applications or libraries, while <code>.java</code> files are used for development.</p>
+            
+            <h2>Where to Download JAR Files</h2>
+            <p>JAR files can be downloaded from various repositories and websites. Some common sources include:</p>
+            <ul>
+                <li><a href="https://mvnrepository.com/" target="_blank">Maven Repository</a></li>
+                <li><a href="https://search.maven.org/" target="_blank">Maven Central</a></li>
+                <li><a href="https://repo1.maven.org/maven2/" target="_blank">Maven Repository</a></li>
+                <li><a href="https://sourceforge.net/" target="_blank">SourceForge</a></li>
+            </ul>
+            
+            <h2>How to Add JAR Files to Your Eclipse Project</h2>
+            <h3>Step 1: Download the JAR File</h3>
+            <p>First, download the JAR file you need from a reliable source.</p>
+
+            <h3>Step 2: Add the JAR File to Your Project</h3>
+            <ol>
+                <li>Right-click on your project in the Project Explorer.</li>
+                <li>Select <strong>Build Path</strong> > <strong>Configure Build Path</strong>.</li>
+                <li>Go to the <strong>Libraries</strong> tab.</li>
+                <li>Click on <strong>Add External JARs...</strong>.</li>
+                <li>Navigate to the location of the JAR file and select it.</li>
+                <li>Click <strong>Open</strong>.</li>
+                <li>Click <strong>Apply and Close</strong>.</li>
+            </ol>
+
+            <h3>Step 3: Verify the JAR File is in Your Build Path</h3>
+            <p>Once you have added the JAR file, you should see it listed under the <strong>Referenced Libraries</strong> section in your Project Explorer. You can now use the classes and methods from the JAR file in your code.</p>
+
+            <h3>Example</h3>
+            <pre class="code"><code class="language-java">import org.apache.commons.lang3.StringUtils;
+
+public class Main {
+    public static void main(String[] args) {
+        String str = "Hello, World!";
+        System.out.println("Is the string empty? " + StringUtils.isEmpty(str));
+    }
+}
+            </code></pre>
+
+            <p>This topic is selected based on different experiences and is not foolproof. Kindly use it with your discretion.</p>
+            <p>In case you find any mistake or have suggestions for new topics, kindly <a href="../../about.html">contact me</a>.</p>
+        </section>
+    </main>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../../loadTemplate.js"></script>
+    <script src="../../script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-java.min.js"></script>
+</body>
+</html>
