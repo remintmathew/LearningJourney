@@ -1,13 +1,13 @@
 const topics = {
     java: {
-        "Java Maps": "topics/java/java_maps.html",
-        "== vs .equals in Java": "topics/java/equals_vs_double_equals.html",
-        "Guide to Creating and Executing C Executables with Shared Libraries and Java Integration": "topics/java/guide_to_creating_c_executables.html",
-        "OOP vs Nested Maps in Java": "topics/java/OOP vs Nested Maps in Java.html",
-        "How to Add External Libraries (JAR files) in Eclipse": "topics/java/add_external_jars_eclipse.html"
+        "1. Java Maps": "topics/java/java_maps.html",
+        "2. == vs .equals in Java": "topics/java/equals_vs_double_equals.html",
+        "3. Guide to Creating and Executing C Executables with Shared Libraries and Java Integration": "topics/java/guide_to_creating_c_executables.html",
+        "4. OOP vs Nested Maps in Java": "topics/java/OOP vs Nested Maps in Java.html",
+        "5. How to Add External Libraries (JAR files) in Eclipse": "topics/java/add_external_jars_eclipse.html"
     },
     python: {
-        "Python Basics": "topics/python/python_basics.html",
+        "1. How to Install Python with Anaconda and Advantages of Python": "topics/python/python_installation_and_anaconda.html"
     }
 };
 
