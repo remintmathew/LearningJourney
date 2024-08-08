@@ -3,7 +3,8 @@ const topics = {
         "Java Maps": "topics/java/java_maps.html",
         "== vs .equals in Java": "topics/java/equals_vs_double_equals.html",
         "Guide to Creating and Executing C Executables with Shared Libraries and Java Integration": "topics/java/guide_to_creating_c_executables.html",
-        "OOP vs Nested Maps in Java": "topics/java/OOP vs Nested Maps in Java.html"
+        "OOP vs Nested Maps in Java": "topics/java/OOP vs Nested Maps in Java.html",
+        "How to Add External Libraries (JAR files) in Eclipse": "topics/java/add_external_jars_eclipse.html"
     },
     python: {
         "Python Basics": "topics/python/python_basics.html",
